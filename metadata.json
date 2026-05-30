@@ -1,0 +1,6 @@
+{
+  "name": "GHZ Studio",
+  "description": "Estúdio de design e desenvolvimento de sites de alta conversão. Landing pages, portfólios e SEO com design minimalista e focado em resultados.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
