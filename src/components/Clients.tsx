@@ -250,7 +250,7 @@ export default function Clients() {
       
       <div className="max-w-7xl mx-auto px-6 relative z-10 mb-12 text-center">
         <h2 className="text-3xl md:text-4xl font-display font-extrabold text-zinc-900 tracking-tight">
-          Alguns de nossos clientes
+          Projetos desenvolvidos 
         </h2>
         <div className="w-16 h-[2.5px] mt-3 mx-auto bg-[#0d9488]" />
       </div>
