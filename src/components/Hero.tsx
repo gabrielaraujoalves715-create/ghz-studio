@@ -45,7 +45,8 @@ export default function Hero() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-auto font-display font-bold tracking-wide"
+              className="w-full max-w-xs py-12 font-display font-bold tracking-wide"
+
               colors={{
                 bg: "#0E4D54",
                 bgSubtle: "#093438",
