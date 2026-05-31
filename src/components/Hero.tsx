@@ -19,9 +19,9 @@ export default function Hero() {
           {/* Main Title / Headline */}
           <div className="space-y-3 max-w-3xl">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-extrabold tracking-tight text-charcoal leading-[1.08]">
-              Sites modernos para empresas que querem gerar{" "}
+            Sua empresa merece uma presença digital que transmite{" "}
               <span className="text-brand-teal">
-                mais clientes
+              confiança e profissionalismo
               </span>
               .
             </h1>
