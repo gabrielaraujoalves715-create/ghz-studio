@@ -6,7 +6,7 @@ import Services from "./components/Services";
 import ContactForm from "./components/ContactForm";
 import FAQ from "./components/FAQ";
 import CTASection from "./components/CTASection";
-
+import WhyChoose from "./components/WhyChoose";
 export default function App() {
   return (
     <div className="relative min-h-screen bg-brand-bg text-charcoal">
@@ -23,7 +23,7 @@ export default function App() {
 
         {/* Minimalist Grid Services section */}
         <Services />
-
+        <WhyChoose />
         {/* Lead qualification contact form */}
         <ContactForm />
 
