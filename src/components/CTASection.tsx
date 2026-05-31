@@ -25,8 +25,7 @@ export default function CTASection() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full max-w-md py-7 font-display font-bold tracking-wide"
-            style={{ padding: "1.8rem 7.75rem" }}
+            className="w-full sm:w-[420px] py-6 md:py-7 px-6 md:px-12 font-display font-bold tracking-wide text-sm md:text-base"
             colors={{
               bg: "#0E4D54",
               bgSubtle: "#093438",

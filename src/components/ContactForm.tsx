@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Check, Send, AlertCircle, Sparkles, Building2 } from "lucide-react";
 import { getWhatsAppLink } from "../data";
 import { FloatingPaths } from "@/components/ui/background-paths";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -293,11 +294,18 @@ export default function ContactForm() {
 
               {/* Submission CTA button */}
               <div className="pt-4">
-                <button
+                <ShinyButton
                   id="btn-submit-lead-form"
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full relative group overflow-hidden bg-brand-teal hover:bg-brand-teal-dark active:scale-[0.98] text-white font-display font-bold py-4 rounded-xl shadow-lg transition-all duration-200 disabled:opacity-75 flex items-center justify-center gap-3"
+                  className="w-full py-6 md:py-7 px-6 md:px-8 font-display font-bold tracking-wide text-sm md:text-base flex items-center justify-center gap-3"
+                  colors={{
+                    bg: "#0E4D54",
+                    bgSubtle: "#093438",
+                    fg: "#ffffff",
+                    highlight: "#2dd4bf",
+                    highlightSubtle: "#5eead4",
+                  }}
                 >
                   {isSubmitting ? (
                     <>
@@ -305,9 +313,9 @@ export default function ContactForm() {
                       <span>Processando informações...</span>
                     </>
                   ) : (
-                    <span className="font-display font-bold tracking-wide text-base">Solicitar orçamento</span>
+                    <span>Solicitar orçamento</span>
                   )}
-                </button>
+                </ShinyButton>
                 <p className="text-center text-xs text-zinc-400 font-display tracking-wide mt-3">
                   Ao enviar, você concorda com o envio imediato e seguro para análise comercial.
                 </p>
