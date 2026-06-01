@@ -78,9 +78,9 @@ export default function FAQ() {
               href={getWhatsAppLink("Olá GHZ Studio! Analisei o FAQ mas tenho uma dúvida diferente sobre os serviços de desenvolvimento.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3.5 bg-neutral-100 hover:bg-brand-teal hover:text-white transition-all duration-300 text-xs font-mono font-bold tracking-wider uppercase text-charcoal"
+              className="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-neutral-100 hover:bg-brand-teal hover:text-white transition font-display font-bold tracking-wide text-sm md:text-base"
             >
-              Conversar no WhatsApp
+              conversar no whatsapp
             </a>
           </div>
         </div>
