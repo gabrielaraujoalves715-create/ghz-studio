@@ -7,6 +7,8 @@ import ContactForm from "./components/ContactForm";
 import FAQ from "./components/FAQ";
 import CTASection from "./components/CTASection";
 import WhyChoose from "./components/WhyChoose";
+import SmartChat from "./components/SmartChat";
+
 export default function App() {
   return (
     <div className="relative min-h-screen bg-brand-bg text-charcoal">
@@ -33,6 +35,9 @@ export default function App() {
         {/* Strong Final CTA conversion box */}
         <CTASection />
       </main>
+
+      {/* Smart Chat Floating Button */}
+      <SmartChat />
     </div>
   );
 }
