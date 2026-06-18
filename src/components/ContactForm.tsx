@@ -133,7 +133,7 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-zinc-100 shadow-2xl shadow-zinc-200/50 p-6 md:p-10 max-w-3xl mx-auto text-zinc-800">
+        <div className="bg-transparent rounded-3xl border border-zinc-100/50 p-6 md:p-10 max-w...">
           {isSubmitted ? (
             <div className="text-center py-10 space-y-6">
               <div className="w-16 h-16 bg-brand-teal/10 rounded-full flex items-center justify-center mx-auto text-brand-teal">
