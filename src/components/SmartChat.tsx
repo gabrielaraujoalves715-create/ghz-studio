@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { X, Send, MessageSquare } from "lucide-react";
-import { getWhatsAppLink, AGENCY_PHONE } from "../data";
+import { X, MessageSquare } from "lucide-react";
+import { getWhatsAppLink } from "../data";
 
 interface ChatMessage {
   id: string;
@@ -8,155 +8,146 @@ interface ChatMessage {
   text: string;
 }
 
-interface ConversationData {
-  hasWebsite?: string;
-  businessType?: string;
-  currentChallenges?: string;
-  goals?: string;
-}
+type AnswerKey = "canal" | "site" | "objetivo" | "segmento";
+
+const steps: {
+  key: AnswerKey;
+  question: string;
+  options: string[];
+}[] = [
+  {
+    key: "canal",
+    question:
+      "Oi, tudo bem? Antes de te indicar qualquer solução, quero entender rapidamente o cenário da sua empresa.\n\nHoje a maioria dos seus clientes encontra sua empresa por onde?",
+    options: ["Instagram e WhatsApp", "Google", "Indicação"],
+  },
+  {
+    key: "site",
+    question:
+      "Entendi. E quando alguém encontra sua empresa, consegue visualizar facilmente seus serviços, informações e uma forma rápida de entrar em contato?",
+    options: ["Sim", "Mais ou menos", "Não"],
+  },
+  {
+    key: "objetivo",
+    question:
+      "Perfeito. Pensando no momento atual da sua empresa, qual seria a principal prioridade?",
+    options: [
+     "Atrair mais clientes",
+      "Passar mais credibilidade",
+      "Receber mais contatos",
+      "Facilitar agendamentos",
+      "Melhorar a experiência do cliente",
+      "Mostrar melhor meus serviços",
+      "Criar página para anúncios",
+    ],
+  },
+  {
+    key: "segmento",
+    question:
+      "Para eu direcionar melhor a análise, qual é o segmento da sua empresa?",
+    options: ["Clínica", "Barbearia", "Restaurante", "Loja", "Outro"],
+  },
+];
 
 export default function SmartChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [conversationStep, setConversationStep] = useState(0);
-  const [conversationData, setConversationData] = useState<ConversationData>({});
-  const [userInput, setUserInput] = useState("");
-  const [isWaitingForInput, setIsWaitingForInput] = useState(false);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<AnswerKey, string>>({
+    canal: "",
+    site: "",
+    objetivo: "",
+    segmento: "",
+  });
 
-  const questions = [
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      id: "initial",
-      text: "Oi, tudo bem? Antes de te direcionar para o WhatsApp, quero entender rapidamente o cenário da sua empresa. Hoje sua empresa já tem site ou usa mais Instagram, Google e WhatsApp para receber clientes?",
-      dataKey: "hasWebsite",
-      options: ["Já tenho site", "Uso Instagram, Google e WhatsApp", "Não tenho presença digital"],
+      id: "initial-message",
+      type: "bot",
+      text: steps[0].question,
     },
-    {
-      id: "business",
-      text: "Legal! E qual é o seu tipo de negócio ou serviço?",
-      dataKey: "businessType",
-      options: null, // Free input
-    },
-    {
-      id: "challenges",
-      text: "Qual é o seu maior desafio no momento para capturar mais clientes?",
-      dataKey: "currentChallenges",
-      options: null, // Free input
-    },
-    {
-      id: "goals",
-      text: "E qual é o principal resultado que você espera alcançar nos próximos 3 meses?",
-      dataKey: "goals",
-      options: null, // Free input
-    },
-  ];
+  ]);
 
-  const openChat = () => {
-    setIsOpen(true);
-    if (messages.length === 0) {
-      // Initialize with first message
-      const initialMessage: ChatMessage = {
-        id: "msg-0",
-        type: "bot",
-        text: questions[0].text,
-      };
-      setMessages([initialMessage]);
-      setConversationStep(0);
-      setIsWaitingForInput(true);
-    }
-  };
-
-  const closeChat = () => {
-    setIsOpen(false);
-  };
+  const isFinished = step >= steps.length;
 
   const handleOptionClick = (option: string) => {
-    addUserMessage(option);
-  };
+    const currentStep = steps[step];
 
-  const handleSendMessage = () => {
-    if (userInput.trim()) {
-      addUserMessage(userInput);
-      setUserInput("");
-    }
-  };
-
-  const addUserMessage = (text: string) => {
-    const newUserMessage: ChatMessage = {
-      id: `msg-user-${Date.now()}`,
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
       type: "user",
-      text,
+      text: option,
     };
 
-    setMessages((prev) => [...prev, newUserMessage]);
-    setIsWaitingForInput(false);
+    const updatedAnswers = {
+      ...answers,
+      [currentStep.key]: option,
+    };
 
-    // Save to conversation data
-    const currentQuestion = questions[conversationStep];
-    if (currentQuestion.dataKey) {
-      setConversationData((prev) => ({
-        ...prev,
-        [currentQuestion.dataKey]: text,
-      }));
+    setAnswers(updatedAnswers);
+
+    const nextStep = step + 1;
+
+    if (nextStep < steps.length) {
+      const botMessage: ChatMessage = {
+        id: `bot-${Date.now()}`,
+        type: "bot",
+        text: steps[nextStep].question,
+      };
+
+      setMessages((prev) => [...prev, userMessage, botMessage]);
+      setStep(nextStep);
+      return;
     }
 
-    // Check if we have more questions
-    if (conversationStep < questions.length - 1) {
-      // Next question
-      setTimeout(() => {
-        const nextQuestion = questions[conversationStep + 1];
-        const botMessage: ChatMessage = {
-          id: `msg-bot-${Date.now()}`,
-          type: "bot",
-          text: nextQuestion.text,
-        };
-        setMessages((prev) => [...prev, botMessage]);
-        setConversationStep((prev) => prev + 1);
-        setIsWaitingForInput(true);
-      }, 500);
-    } else {
-      // Show WhatsApp button
-      setTimeout(() => {
-        const finalMessage: ChatMessage = {
-          id: `msg-bot-${Date.now()}`,
-          type: "bot",
-          text: "Perfeito! Agora vou te direcionar para o WhatsApp para continuar esse atendimento com mais detalhes. Um dos nossos consultores vai responder em breve! 📱",
-        };
-        setMessages((prev) => [...prev, finalMessage]);
-        setIsWaitingForInput(false);
-      }, 500);
-    }
-  };
-
-  const generateWhatsAppMessage = () => {
-    const lines = [
-      "Olá! Gostaria de conhecer mais sobre os serviços da GHZ Studio.",
-      "",
-      "Algumas informações sobre minha empresa:",
-      `📱 Presença digital atual: ${conversationData.hasWebsite || "Não informado"}`,
-      `🏢 Tipo de negócio: ${conversationData.businessType || "Não informado"}`,
-      `📊 Desafios: ${conversationData.currentChallenges || "Não informado"}`,
-      `🎯 Objetivos: ${conversationData.goals || "Não informado"}`,
-    ];
-    return lines.join("\n");
+    const finalMessage: ChatMessage = {
+      id: `bot-final-${Date.now()}`,
+      type: "bot",
+      text:
+         "Pelo que você me contou, identifiquei algumas oportunidades para melhorar a forma como sua empresa é encontrada e percebida online.\n\n" +
+    "Em uma análise rápida, conseguimos te mostrar pontos de melhoria específicos para o seu negócio.\n\n" +
+    "A análise é feita pela GHZ Studio e não gera nenhum compromisso de contratação.\n\n" +
+    "Clique abaixo para continuar.",
+};
+    setMessages((prev) => [...prev, userMessage, finalMessage]);
+    setStep(nextStep);
   };
 
   const handleWhatsAppClick = () => {
-    const message = generateWhatsAppMessage();
-    const whatsappLink = getWhatsAppLink(message);
-    window.open(whatsappLink, "_blank");
-    closeChat();
-  };
+  const message =
+    `Olá, vim pelo site da GHZ Studio.\n\n` +
+    `Resumo da minha empresa:\n\n` +
+    `• Principal canal: ${answers.canal}\n` +
+    `• Clareza das informações online: ${answers.site}\n` +
+    `• Principal objetivo: ${answers.objetivo}\n` +
+    `• Segmento: ${answers.segmento}\n\n` +
+    `Gostaria de receber uma análise da minha presença digital.`;
 
-  const isConversationComplete = conversationStep === questions.length - 1 && !isWaitingForInput;
-  const currentQuestion = conversationStep < questions.length ? questions[conversationStep] : null;
-  const hasOptions = currentQuestion?.options && currentQuestion.options.length > 0;
+  window.open(getWhatsAppLink(message), "_blank");
+  setIsOpen(false);
+};
+
+  const resetChat = () => {
+    setStep(0);
+    setAnswers({
+      canal: "",
+      site: "",
+      objetivo: "",
+      segmento: "",
+    });
+    setMessages([
+      {
+        id: "initial-message",
+        type: "bot",
+        text: steps[0].question,
+      },
+    ]);
+  };
 
   return (
     <>
-      {/* Floating Button */}
       {!isOpen && (
         <button
-          onClick={openChat}
+          onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-brand-teal hover:bg-brand-teal-dark text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
           title="Abrir atendimento"
         >
@@ -164,22 +155,26 @@ export default function SmartChat() {
         </button>
       )}
 
-      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-full max-w-md h-96 md:h-[32rem] bg-white rounded-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)' }}>
-          {/* Header */}
+        <div
+          className="fixed bottom-6 right-6 z-50 w-full max-w-md h-96 md:h-[32rem] bg-white rounded-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300"
+          style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)" }}
+        >
           <div className="bg-white border-b border-gray-200 p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center">
                 <MessageSquare size={20} className="text-brand-teal" />
               </div>
               <div>
-                <h3 className="font-semibold text-sm text-charcoal">GHZ Studio</h3>
-                <p className="text-xs text-gray-500">Atendimento Inteligente</p>
+                <h3 className="font-semibold text-sm text-charcoal">
+                  GHZ Studio
+                </h3>
+                <p className="text-xs text-gray-500">Atendimento consultivo</p>
               </div>
             </div>
+
             <button
-              onClick={closeChat}
+              onClick={() => setIsOpen(false)}
               className="text-charcoal hover:bg-gray-100 p-2 rounded-lg transition-colors"
               title="Fechar chat"
             >
@@ -187,15 +182,16 @@ export default function SmartChat() {
             </button>
           </div>
 
-          {/* Messages Container */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex ${msg.type === "bot" ? "justify-start" : "justify-end"}`}
+                className={`flex ${
+                  msg.type === "bot" ? "justify-start" : "justify-end"
+                }`}
               >
                 <div
-                  className={`max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                  className={`max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
                     msg.type === "bot"
                       ? "bg-white text-charcoal border border-gray-200 rounded-bl-none"
                       : "bg-brand-teal text-white rounded-br-none"
@@ -206,14 +202,13 @@ export default function SmartChat() {
               </div>
             ))}
 
-            {/* Options or Input Area */}
-            {isWaitingForInput && hasOptions && (
-              <div className="space-y-2 mt-4">
-                {currentQuestion!.options!.map((option, idx) => (
+            {!isFinished && (
+              <div className="grid grid-cols-1 gap-2">
+                {steps[step].options.map((option) => (
                   <button
-                    key={idx}
+                    key={option}
                     onClick={() => handleOptionClick(option)}
-                    className="w-full p-3 text-left text-sm rounded-lg border border-gray-300 hover:border-brand-teal hover:bg-brand-teal/5 transition-colors text-charcoal font-medium"
+                    className="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-charcoal hover:border-brand-teal hover:text-brand-teal transition-colors"
                   >
                     {option}
                   </button>
@@ -221,44 +216,29 @@ export default function SmartChat() {
               </div>
             )}
 
-            {/* Final WhatsApp Button */}
-            {isConversationComplete && (
-              <div className="mt-4 space-y-3">
+            {isFinished && (
+              <div className="mt-4 space-y-3 border-t border-gray-200 pt-4">
                 <button
                   onClick={handleWhatsAppClick}
                   className="w-full py-3 bg-brand-teal hover:bg-brand-teal-dark text-white rounded-lg font-semibold text-sm transition-colors"
                 >
                   Continuar pelo WhatsApp
                 </button>
+
+                <button
+                  onClick={resetChat}
+                  className="w-full py-2 text-sm text-gray-500 hover:text-brand-teal transition-colors"
+                >
+                  Refazer respostas
+                </button>
+
                 <p className="text-xs text-gray-500 text-center">
-                  Você será redirecionado para o WhatsApp com suas informações.
+                  Você será direcionado para continuar com a GHZ Studio pelo
+                  WhatsApp.
                 </p>
               </div>
             )}
           </div>
-
-          {/* Input Area */}
-          {isWaitingForInput && !hasOptions && (
-            <div className="border-t border-gray-200 p-4 bg-white flex gap-2">
-              <input
-                type="text"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                placeholder="Digite sua resposta..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal text-sm"
-                autoFocus
-              />
-              <button
-                onClick={handleSendMessage}
-                disabled={!userInput.trim()}
-                className="p-2 bg-brand-teal hover:bg-brand-teal-dark disabled:opacity-50 text-white rounded-lg transition-colors"
-                title="Enviar"
-              >
-                <Send size={18} />
-              </button>
-            </div>
-          )}
         </div>
       )}
     </>
