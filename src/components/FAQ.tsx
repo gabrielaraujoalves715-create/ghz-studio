@@ -66,7 +66,7 @@ export default function FAQ() {
         </div>
 
         {/* Callout box for other questions */}
-        <div className="mt-16 bg-white border border-zinc-200/70 p-8 text-center space-y-5 shadow-xs max-w-2xl mx-auto">
+        <div className="mt-16 bg-transparent border border-zinc-200/70 p-8 text-center space-y-5 shadow-xs max-w-2xl mx-auto">
           <p className="font-display font-bold text-charcoal text-base">
             Ainda tem alguma dúvida?
           </p>

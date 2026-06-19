@@ -61,7 +61,7 @@ export default function Header() {
         {/* Call to Action Button */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href={getWhatsAppLink("Olá GHZ Studio! Acessei o site de vocês e gostaria de solicitar um orçamento gratuito para meu negócio.")}
+            href={getWhatsAppLink("Olá GHZ Studio! Acessei o site de vocês e gostaria de solicitar uma analise gratuito para meu negócio.")}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-1.5 bg-gradient-to-r from-[#090d18] via-[#0c1326] to-[#050812] border border-blue-900/40 hover:from-[#121c3b] hover:via-[#16254e] hover:to-[#0b1227] hover:border-blue-700/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] active:from-[#050810] active:to-[#020306] text-white font-medium text-xs font-display tracking-wide uppercase px-5 py-3 hover:scale-[1.02] active:scale-[0.97] transition-all duration-300 shadow-sm cursor-pointer select-none rounded"

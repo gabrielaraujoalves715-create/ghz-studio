@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Clients from "./components/Clients";
@@ -8,6 +7,7 @@ import FAQ from "./components/FAQ";
 import CTASection from "./components/CTASection";
 import WhyChoose from "./components/WhyChoose";
 import SmartChat from "./components/SmartChat";
+import ScrollReveal from "./components/ScrollReveal";
 
 export default function App() {
   return (
@@ -21,19 +21,33 @@ export default function App() {
         <Hero />
 
         {/* Some of our beautiful clients carousel */}
-        <Clients />
+        <ScrollReveal>
+          <Clients />
+        </ScrollReveal>
 
         {/* Minimalist Grid Services section */}
-        <Services />
-        <WhyChoose />
+        <ScrollReveal>
+          <Services />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <WhyChoose />
+        </ScrollReveal>
+
         {/* Lead qualification contact form */}
-        <ContactForm />
+        <ScrollReveal>
+          <ContactForm />
+        </ScrollReveal>
 
         {/* Fully Interactive FAQ Section */}
-        <FAQ />
+        <ScrollReveal>
+          <FAQ />
+        </ScrollReveal>
 
         {/* Strong Final CTA conversion box */}
-        <CTASection />
+        <ScrollReveal>
+          <CTASection />
+        </ScrollReveal>
       </main>
 
       {/* Smart Chat Floating Button */}

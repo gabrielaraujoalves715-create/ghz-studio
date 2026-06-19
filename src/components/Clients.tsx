@@ -117,14 +117,6 @@ export default function Clients() {
       ),
     },
     {
-      id: "dubriques",
-      type: "image",
-      title: "Dubriques",
-      subtitle: "infoprodutor",
-      bgClass: "bg-zinc-900",
-      imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    },
-    {
       id: "peakhabit",
       type: "brand",
       title: "PeakHabit",
