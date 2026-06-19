@@ -8,7 +8,8 @@ export interface FloatingPathsProps {
 }
 
 export function FloatingPaths({ position }: FloatingPathsProps) {
-    const paths = Array.from({ length: 36 }, (_, i) => ({
+    // Desktop paths — landscape viewBox 696×316 (original, unchanged)
+    const desktopPaths = Array.from({ length: 36 }, (_, i) => ({
         id: i,
         d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
             380 - i * 5 * position
@@ -17,41 +18,88 @@ export function FloatingPaths({ position }: FloatingPathsProps) {
         } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
             684 - i * 5 * position
         } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-        color: `rgba(15,23,42,${0.1 + i * 0.03})`,
         width: 0.5 + i * 0.03,
     }));
 
+    // Mobile paths — 18 curves centered on 360×640 viewBox, fanning diagonally
+    // Each path i is offset from center (x=180) so all 18 spread evenly across the full width.
+    // position=1 fans left-to-right; position=-1 fans right-to-left → together they cross nicely.
+    const mobilePaths = Array.from({ length: 18 }, (_, i) => ({
+        id: i,
+        d: `M${180 - (i - 8.5) * 16 * position} -40C${
+            180 - (i - 8.5) * 10 * position
+        } 180 ${180 + (i - 8.5) * 10 * position} 460 ${
+            180 + (i - 8.5) * 16 * position
+        } 680`,
+        width: 0.4 + i * 0.04,
+    }));
+
     return (
-        <div className="absolute inset-0 pointer-events-none">
-            <svg
-                className="w-full h-full text-slate-950 dark:text-white"
-                viewBox="0 0 696 316"
-                preserveAspectRatio="xMinYMid slice"
-                fill="none"
-            >
-                <title>Background Paths</title>
-                {paths.map((path) => (
-                    <motion.path
-                        key={path.id}
-                        d={path.d}
-                        stroke="currentColor"
-                        strokeWidth={path.width}
-                        strokeOpacity={0.1 + path.id * 0.03}
-                        initial={{ pathLength: 0.3, opacity: 0.6 }}
-                        animate={{
-                            pathLength: 1,
-                            opacity: [0.3, 0.6, 0.3],
-                            pathOffset: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
-                            repeat: Number.POSITIVE_INFINITY,
-                            ease: "linear",
-                        }}
-                    />
-                ))}
-            </svg>
-        </div>
+        <>
+            {/* Desktop: landscape paths, hidden on mobile */}
+            <div className="absolute inset-0 pointer-events-none hidden md:block">
+                <svg
+                    className="w-full h-full text-slate-950 dark:text-white"
+                    viewBox="0 0 696 316"
+                    preserveAspectRatio="xMidYMid slice"
+                    fill="none"
+                >
+                    <title>Background Paths</title>
+                    {desktopPaths.map((path) => (
+                        <motion.path
+                            key={path.id}
+                            d={path.d}
+                            stroke="currentColor"
+                            strokeWidth={path.width}
+                            strokeOpacity={0.1 + path.id * 0.03}
+                            initial={{ pathLength: 0.3, opacity: 0.6 }}
+                            animate={{
+                                pathLength: 1,
+                                opacity: [0.3, 0.6, 0.3],
+                                pathOffset: [0, 1, 0],
+                            }}
+                            transition={{
+                                duration: 20 + Math.random() * 10,
+                                repeat: Number.POSITIVE_INFINITY,
+                                ease: "linear",
+                            }}
+                        />
+                    ))}
+                </svg>
+            </div>
+
+            {/* Mobile: portrait paths, hidden on desktop */}
+            <div className="absolute inset-0 pointer-events-none block md:hidden overflow-hidden">
+                <svg
+                    className="w-full h-full text-slate-950 dark:text-white"
+                    viewBox="0 0 360 640"
+                    preserveAspectRatio="xMidYMid slice"
+                    fill="none"
+                >
+                    <title>Background Paths Mobile</title>
+                    {mobilePaths.map((path) => (
+                        <motion.path
+                            key={path.id}
+                            d={path.d}
+                            stroke="currentColor"
+                            strokeWidth={path.width}
+                            strokeOpacity={0.06 + path.id * 0.012}
+                            initial={{ pathLength: 0.3, opacity: 0.6 }}
+                            animate={{
+                                pathLength: 1,
+                                opacity: [0.3, 0.6, 0.3],
+                                pathOffset: [0, 1, 0],
+                            }}
+                            transition={{
+                                duration: 20 + Math.random() * 10,
+                                repeat: Number.POSITIVE_INFINITY,
+                                ease: "linear",
+                            }}
+                        />
+                    ))}
+                </svg>
+            </div>
+        </>
     );
 }
 
