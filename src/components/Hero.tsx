@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="relative pt-28 md:pt-36 pb-16 flex items-center justify-center overflow-hidden bg-brand-bg">
       {/* Background decoration with floating animated paths */}
-      <div className="absolute inset-0 opacity-30 dark:opacity-40 pointer-events-none select-none z-0">
+      <div className="absolute inset-0 opacity-50 md:opacity-30 dark:opacity-40 pointer-events-none select-none z-0">
         <FloatingPaths position={1} />
         <FloatingPaths position={-1} />
       </div>

@@ -26,7 +26,7 @@ export function FloatingPaths({ position }: FloatingPathsProps) {
             <svg
                 className="w-full h-full text-slate-950 dark:text-white"
                 viewBox="0 0 696 316"
-                preserveAspectRatio="none"
+                preserveAspectRatio="xMidYMid slice"
                 fill="none"
             >
                 <title>Background Paths</title>
