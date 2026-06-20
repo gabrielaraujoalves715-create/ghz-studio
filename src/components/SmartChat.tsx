@@ -192,7 +192,7 @@ export default function SmartChat() {
                 }`}
               >
                 <div
-                  className={`max-w-xs px-3 py-2 rounded-2xl text-sm md:text-base font-medium leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-xs md:max-w-none md:w-full px-3 py-2 rounded-2xl text-sm md:text-base font-medium leading-relaxed whitespace-pre-wrap ${
                     msg.type === "bot"
                       ? "bg-white text-charcoal border border-gray-200 rounded-bl-none"
                       : "bg-brand-teal text-white rounded-br-none"
