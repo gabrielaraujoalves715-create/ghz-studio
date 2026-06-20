@@ -148,10 +148,10 @@ export default function SmartChat() {
       {!isOpen && (
           <button
   onClick={() => setIsOpen(true)}
-  className="fixed bottom-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal text-white shadow-lg md:bottom-6 md:right-6 md:h-16 md:w-16"
+  className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-teal text-white shadow-lg md:bottom-6 md:right-6 md:h-16 md:w-16"
   title="Abrir atendimento"
 >
-  <MessageSquare className="h-5 w-5 md:h-7 md:w-7" />
+  <MessageSquare className="h-6 w-6 md:h-7 md:w-7" />
 </button>
        
       )}
