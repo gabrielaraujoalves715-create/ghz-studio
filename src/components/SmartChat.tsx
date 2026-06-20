@@ -18,13 +18,13 @@ const steps: {
   {
     key: "canal",
     question:
-      "Oi, tudo bem? Antes de te indicar qualquer solução, quero entender rapidamente o cenário da sua empresa.\n\nHoje a maioria dos seus clientes encontra sua empresa por onde?",
+      "Oi, tudo bem? Antes de te indicar qualquer solução, quero entender rapidamente o cenário da sua empresa.\n\nHoje por onde a maioria dos seus clientes entram em contato com a sua empresa?",
     options: ["Instagram e WhatsApp", "Google", "Indicação"],
   },
   {
     key: "site",
     question:
-      "Entendi. E quando alguém encontra sua empresa, consegue visualizar facilmente seus serviços, informações e uma forma rápida de entrar em contato?",
+      "Entendi. E quando alguém encontra sua empresa no Google, Instagram ou WhatsApp, consegue visualizar facilmente seus serviços, informações e uma forma rápida de entrar em contato?",
     options: ["Sim", "Mais ou menos", "Não"],
   },
   {
@@ -44,7 +44,7 @@ const steps: {
   {
     key: "segmento",
     question:
-      "Para eu direcionar melhor a análise, qual é o segmento da sua empresa?",
+      "Para mim direcionar melhor a sua análise, qual é o segmento da sua empresa?",
     options: ["Clínica", "Barbearia", "Restaurante", "Loja", "Outro"],
   },
 ];
