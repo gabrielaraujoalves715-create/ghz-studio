@@ -146,21 +146,22 @@ export default function SmartChat() {
   return (
     <>
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-brand-teal hover:bg-brand-teal-dark text-white shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
-          title="Abrir atendimento"
-        >
-          <MessageSquare size={28} />
-        </button>
+          <button
+  onClick={() => setIsOpen(true)}
+  className="fixed bottom-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-brand-teal text-white shadow-lg md:bottom-6 md:right-6 md:h-16 md:w-16"
+  title="Abrir atendimento"
+>
+  <MessageSquare className="h-5 w-5 md:h-7 md:w-7" />
+</button>
+       
       )}
 
       {isOpen && (
         <div
-          className="fixed bottom-6 right-6 z-50 w-full max-w-md h-96 md:h-[32rem] bg-white rounded-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300"
+          className="fixed bottom-4 right-3 z-50 w-[82vw] max-w-[300px] max-h-[65vh] rounded-2xl bg-white"
           style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)" }}
         >
-          <div className="bg-white border-b border-gray-200 p-5 flex items-center justify-between">
+          <div className="bg-white border-b border-gray-200 p-3 md:p-5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center">
                 <MessageSquare size={20} className="text-brand-teal" />
@@ -182,7 +183,7 @@ export default function SmartChat() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="max-h-[45vh] overflow-y-auto p-3 space-y-2 bg-gray-50">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -191,7 +192,7 @@ export default function SmartChat() {
                 }`}
               >
                 <div
-                  className={`max-w-xs px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-xs px-3 py-2 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap ${
                     msg.type === "bot"
                       ? "bg-white text-charcoal border border-gray-200 rounded-bl-none"
                       : "bg-brand-teal text-white rounded-br-none"
@@ -208,7 +209,7 @@ export default function SmartChat() {
                   <button
                     key={option}
                     onClick={() => handleOptionClick(option)}
-                    className="w-full text-left px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-charcoal hover:border-brand-teal hover:text-brand-teal transition-colors"
+                    className="w-full text-left h-10 md:h-12 px-3 md:px-5 bg-white border border-gray-200 rounded-xl text-sm md:text-base text-charcoal hover:border-brand-teal hover:text-brand-teal transition-colors flex items-center"
                   >
                     {option}
                   </button>
@@ -220,14 +221,14 @@ export default function SmartChat() {
               <div className="mt-4 space-y-3 border-t border-gray-200 pt-4">
                 <button
                   onClick={handleWhatsAppClick}
-                  className="w-full py-3 bg-brand-teal hover:bg-brand-teal-dark text-white rounded-lg font-semibold text-sm transition-colors"
+                  className="w-full h-10 md:h-12 px-3 md:px-5 bg-brand-teal hover:bg-brand-teal-dark text-white rounded-lg font-semibold text-sm md:text-base transition-colors"
                 >
                   Continuar pelo WhatsApp
                 </button>
 
                 <button
                   onClick={resetChat}
-                  className="w-full py-2 text-sm text-gray-500 hover:text-brand-teal transition-colors"
+                  className="w-full h-10 md:h-12 text-sm md:text-base text-gray-500 hover:text-brand-teal transition-colors"
                 >
                   Refazer respostas
                 </button>
