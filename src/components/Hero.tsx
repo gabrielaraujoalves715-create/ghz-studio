@@ -52,7 +52,7 @@ export default function Hero() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full max-w-xs py-6 md:py-7 px-6 md:px-8 font-display font-bold tracking-wide text-sm md:text-base"
+              className="w-full max-w-xs py-4 md:py-6 px-8 md:px-16 font-display font-bold tracking-wide text-base md:text-xl md:min-w-[420px]"
 
               colors={{
                 bg: "#0E4D54",
