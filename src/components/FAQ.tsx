@@ -78,7 +78,7 @@ export default function FAQ() {
               href={getWhatsAppLink("Olá GHZ Studio! Analisei o FAQ mas tenho uma dúvida diferente sobre os serviços de desenvolvimento.")}
               target="_blank"
               rel="noopener noreferrer"
-               className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-neutral-100 px-6 py-3.5 font-display text-sm font-bold tracking-wide text-zinc-900 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-teal hover:text-white hover:shadow-xl active:translate-y-0 active:scale-[0.98]"
+               className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-[#075E63] px-6 py-3.5 font-display text-sm font-bold tracking-wide text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#064f54] hover:shadow-xl active:translate-y-0 active:scale-[0.98]"
 >
   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
 

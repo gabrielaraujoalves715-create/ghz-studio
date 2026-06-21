@@ -4,7 +4,7 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function CTASection() {
   const whatsappUrl = getWhatsAppLink(
-    "Olá GHZ Studio! Gostaria de conversar sobre a presença digital da minha empresa e solicitar um orçamento."
+    "Olá GHZ Studio! Gostaria de conversar sobre a presença digital da minha empresa e solicitar uma analise gratuita."
   );
 
   return (

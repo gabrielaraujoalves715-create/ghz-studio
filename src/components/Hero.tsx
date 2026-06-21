@@ -43,12 +43,12 @@ export default function Hero() {
           <div className="pt-4 flex flex-col items-center gap-3 w-full">
             <div className="bg-white border border-zinc-100 px-8 py-5 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.08)] max-w-2xl mx-auto mb-2">
               <p className="text-base sm:text-lg text-zinc-800 font-bold leading-relaxed">
-                Solicite seu orçamento e receba um plano personalizado para a necessidade do seu negócio
+                Solicite sua análise gratuita e receba um plano personalizado para a necessidade do seu negócio
               </p>
             </div>
             <ShinyButton
               href={getWhatsAppLink(
-                "Olá! Gostaria de solicitar um orçamento para entender como podemos estruturar o site de alta conversão da minha empresa."
+                "Olá! Gostaria de solicitar uma análise gratuita para entender como podemos estruturar o site e o posicionamento digital da minha empresa."
               )}
               target="_blank"
               rel="noopener noreferrer"
