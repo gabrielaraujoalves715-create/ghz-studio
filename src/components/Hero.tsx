@@ -1,15 +1,22 @@
 import React from "react";
 import { getWhatsAppLink } from "../data";
-import { FloatingPaths } from "@/components/ui/background-paths";
+import { SparklesCore } from "@/components/ui/sparkles";
 import { ShinyButton } from "@/components/ui/shiny-button";
 
 export default function Hero() {
   return (
     <section className="relative pt-28 md:pt-36 pb-16 flex items-center justify-center overflow-hidden bg-brand-bg">
-      {/* Background decoration with floating animated paths */}
-      <div className="absolute inset-0 opacity-40 md:opacity-30 dark:opacity-40 pointer-events-none select-none z-0">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
+      {/* Background decoration with sparkles particles */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0">
+        <SparklesCore
+          background="transparent"
+          particleColor="#0f5c63"
+          minSize={0.6}
+          maxSize={1.6}
+          speed={1}
+          particleDensity={45}
+          className="w-full h-full"
+        />
       </div>
 
       <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center gap-5 relative z-10 w-full">
@@ -65,3 +72,4 @@ export default function Hero() {
     </section>
   );
 }
+
